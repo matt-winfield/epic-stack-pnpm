@@ -7,6 +7,6 @@ the community, such as libraries, examples, articles, and videos.
 
 ### Videos
 
-- **Dark Mode Toggling using Client-preference cookies** by
-  [@rajeshdavidbabu](https://github.com/rajeshdavidbabu) - Youtube
-  [link](https://www.youtube.com/watch?v=UND-kib_iw4)
+-   **Dark Mode Toggling using Client-preference cookies** by
+    [@rajeshdavidbabu](https://github.com/rajeshdavidbabu) - Youtube
+    [link](https://www.youtube.com/watch?v=UND-kib_iw4)

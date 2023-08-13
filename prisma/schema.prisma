@@ -5,6 +5,11 @@ datasource db {
 
 generator client {
   provider = "prisma-client-js"
+  // We must manually specify this using a relative path, otherwise with pnpm it will be generated in the wrong place
+  // (e.g. /node_modules/.pnpm/@prisma+client@5.1.1_prisma@5.1.1/node_modules/.prisma instead of /node_modules/.prisma)
+  // Which would mean the Dockerfile wouldn't be able to find it
+  // If you update this path, make sure to update the Dockerfile as well
+  output   = "../node_modules/.prisma/client"
 }
 
 model File {

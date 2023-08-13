@@ -4,7 +4,11 @@
 FROM node:18-bookworm-slim as base
 
 # set for base and all layer that inherit from it
-ENV NODE_ENV production
+ENV PNPM_HOME /pnpm
+ENV PATH $PNPM_HOME:$PATH
+
+# enable pnpm
+RUN corepack enable pnpm
 
 # Install openssl for Prisma
 RUN apt-get update && apt-get install -y fuse3 openssl sqlite3 ca-certificates
@@ -14,8 +18,11 @@ FROM base as deps
 
 WORKDIR /myapp
 
-ADD package.json package-lock.json .npmrc ./
-RUN npm install --include=dev
+ADD package.json pnpm-lock.yaml .npmrc ./
+RUN pnpm install
+
+# Remove .prisma folder from node_modules (it will be generated in build in the right place, we need to remove this one so it doesn't get used by default)
+RUN find . -type d -name .prisma -exec rm -rv {} +
 
 # Setup production node_modules
 FROM base as production-deps
@@ -23,8 +30,9 @@ FROM base as production-deps
 WORKDIR /myapp
 
 COPY --from=deps /myapp/node_modules /myapp/node_modules
-ADD package.json package-lock.json .npmrc ./
-RUN npm prune --omit=dev
+
+ADD package.json pnpm-lock.yaml .npmrc ./
+RUN pnpm prune --prod --no-optional
 
 # Build the app
 FROM base as build
@@ -33,11 +41,9 @@ WORKDIR /myapp
 
 COPY --from=deps /myapp/node_modules /myapp/node_modules
 
-ADD prisma .
-RUN npx prisma generate
-
 ADD . .
-RUN npm run build
+RUN pnpm prisma generate
+RUN pnpm run build
 
 # Finally, build the production image with minimal footprint
 FROM base
@@ -59,6 +65,8 @@ RUN echo "#!/bin/sh\nset -x\nsqlite3 \$DATABASE_URL" > /usr/local/bin/database-c
 WORKDIR /myapp
 
 COPY --from=production-deps /myapp/node_modules /myapp/node_modules
+
+# The prisma client generated in build is added to the node_modules
 COPY --from=build /myapp/node_modules/.prisma /myapp/node_modules/.prisma
 
 COPY --from=build /myapp/server-build /myapp/server-build
@@ -71,8 +79,9 @@ COPY --from=build /myapp/app/components/ui/icons /myapp/app/components/ui/icons
 # prepare for litefs
 COPY --from=flyio/litefs:0.5.4 /usr/local/bin/litefs /usr/local/bin/litefs
 ADD other/litefs.yml /etc/litefs.yml
+ADD other/sentry-create-release.js other/sentry-create-release.js
+ADD other/setup-swap.js other/setup-swap.js
+ADD index.js index.js
 RUN mkdir -p /data ${LITEFS_DIR}
-
-ADD . .
 
 CMD ["litefs", "mount"]

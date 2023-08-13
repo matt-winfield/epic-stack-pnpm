@@ -1,19 +1,7 @@
-<div align="center">
-  <h1 align="center"><a href="https://www.epicweb.dev/epic-stack">The Epic Stack 🚀</a></h1>
-  <strong align="center">
-    Ditch analysis paralysis and start shipping Epic Web apps.
-  </strong>
-  <p>
-    This is an opinionated project starter and reference that allows teams to
-    ship their ideas to production faster and on a more stable foundation based
-    on the experience of <a href="https://kentcdodds.com">Kent C. Dodds</a> and
-    <a href="https://github.com/epicweb-dev/epic-stack/graphs/contributors">contributors</a>.
-  </p>
-</div>
+# Epic Stack template project, with pnpm
 
-```sh
-npx create-remix@latest --typescript --install --template epicweb-dev/epic-stack
-```
+Same as all the usual Epic Stack, but with pnpm instead of npm. Just use `pnpm`
+instead of `npm` in the instructions.
 
 [![The Epic Stack](https://github-production-user-asset-6210df.s3.amazonaws.com/1500684/246885449-1b00286c-aa3d-44b2-9ef2-04f694eb3592.png)](https://www.epicweb.dev/epic-stack)
 
@@ -27,28 +15,21 @@ npx create-remix@latest --typescript --install --template epicweb-dev/epic-stack
 
 ["The Epic Stack" by Kent C. Dodds at #RemixConf 2023 💿](https://www.youtube.com/watch?v=yMK5SVRASxM)
 
-## Docs
+## Getting Started
 
 [Read the docs](https://github.com/epicweb-dev/epic-stack/blob/main/docs)
 (please 🙏).
 
-## Support
+Make sure you are using node 18 and pnpm 8. You can check with `node -v` and
+`pnpm -v`.
 
-- 🆘 Join the
-  [discussion on GitHub](https://github.com/epicweb-dev/epic-stack/discussions)
-  and the [KCD Community on Discord](https://kcd.im/discord).
-- 💡 Create an
-  [idea discussion](https://github.com/epicweb-dev/epic-stack/discussions/new?category=ideas)
-  for suggestions.
-- 🐛 Open a [GitHub issue](https://github.com/epicweb-dev/epic-stack/issues) to
-  report a bug.
+Run `pnpm install` to install dependencies. Then run `pnpm run setup` to
+configure the project for local development.
 
-## Branding
+Run `pnpm dev` to start the development server.
 
-Want to talk about the Epic Stack in a blog post or talk? Great! Here are some
-assets you can use in your material:
-[EpicWeb.dev/brand](https://epicweb.dev/brand)
+Run `pnpm test` to run unit tests, and `pnpm test:e2e` to run end-to-end tests.
 
-## Thanks
+Run `pnpm prisma:studio` to open the Prisma Studio GUI.
 
-You rock 🪨
+Run `pnpm format` to format the code.
