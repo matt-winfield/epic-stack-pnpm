@@ -33,3 +33,12 @@ Run `pnpm test` to run unit tests, and `pnpm test:e2e` to run end-to-end tests.
 Run `pnpm prisma:studio` to open the Prisma Studio GUI.
 
 Run `pnpm format` to format the code.
+
+## Differences from the original Epic Stack
+
+-   Uses pnpm instead of npm
+    -   Dockerfile updated to work with pnpm
+-   Prettier config changed to 4 spaces instead of 2, and semicolons
+    -   (I know it's only an opinion, but it's the correct opinion 😉)
+-   Add a Husky pre-commit hook to run `pnpm format` before committing, to avoid
+    formatting issues early without much developer effort

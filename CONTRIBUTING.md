@@ -10,15 +10,15 @@ instructions:
 
 ### System Requirements
 
-- [Node.js](https://nodejs.org/) >= 18.0.0
-- [npm](https://npmjs.com/) >= 8.18.0
-- [git](https://git-scm.com/) >= 2.38.0
+-   [Node.js](https://nodejs.org/) >= 18.0.0
+-   [pnpm](https://pnpm.io/) >= 8.0.0
+-   [git](https://git-scm.com/) >= 2.38.0
 
 ### Setup steps
 
 1.  Fork and clone the repo
 2.  Copy `.env.example` into `.env`
-3.  Run `npm install && npm run setup -s` to install dependencies and run
+3.  Run `pnpm install && pnpm run setup -s` to install dependencies and run
     validation
 4.  Create a branch for your PR with `git checkout -b pr/your-branch-name`
 
