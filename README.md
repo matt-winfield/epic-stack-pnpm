@@ -42,3 +42,6 @@ Run `pnpm format` to format the code.
     -   (I know it's only an opinion, but it's the correct opinion 😉)
 -   Add a Husky pre-commit hook to run `pnpm format` before committing, to avoid
     formatting issues early without much developer effort
+-   Update the deployment workflow to fix incorrect caching of the database for
+    the end-to-end tests (it would cache the db regardless of if the schema has
+    changes, so any migrations would be ignored)
