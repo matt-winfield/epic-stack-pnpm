@@ -133,12 +133,12 @@ jobs:
             - name: 📥 Install Playwright Browsers
               run: pnpm run test:e2e:install
 
-            - name: 🏦 Restore cached Database
-              id: db-cache-restore
-              uses: actions/cache/restore@v3
+            - name: 🏦 Cache Database
+              id: db-cache
+              uses: actions/cache@v3
               with:
                   path: prisma/data.db
-                  key: db-cache-${{ hashFiles('prisma/schema.prisma') }}
+                  key: db-cache-schema_${{ hashFiles('./prisma/schema.prisma')}}-migrations_${{ hashFiles('./prisma/migrations/*/migration.sql')}}
 
             - name: 🛠 Setup Database
               run: pnpm prisma migrate deploy
