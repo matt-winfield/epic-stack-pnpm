@@ -201,34 +201,6 @@ export async function action({ request }: DataFunctionArgs) {
     return json({ success: true, submission }, responseInit);
 }
 
-const ThemeFormSchema = z.object({
-    theme: z.enum(['system', 'light', 'dark']),
-});
-
-export async function action({ request }: DataFunctionArgs) {
-    const formData = await request.formData();
-    invariantResponse(
-        formData.get('intent') === 'update-theme',
-        'Invalid intent',
-        { status: 400 },
-    );
-    const submission = parse(formData, {
-        schema: ThemeFormSchema,
-    });
-    if (submission.intent !== 'submit') {
-        return json({ status: 'success', submission } as const);
-    }
-    if (!submission.value) {
-        return json({ status: 'error', submission } as const, { status: 400 });
-    }
-    const { theme } = submission.value;
-
-    const responseInit = {
-        headers: { 'set-cookie': setTheme(theme) },
-    };
-    return json({ success: true, submission }, responseInit);
-}
-
 function Document({
     children,
     nonce,
@@ -384,90 +356,6 @@ function UserDropdown() {
                 </DropdownMenuContent>
             </DropdownMenuPortal>
         </DropdownMenu>
-    );
-}
-
-/**
- * @returns the user's theme preference, or the client hint theme if the user
- * has not set a preference.
- */
-export function useTheme() {
-    const hints = useHints();
-    const requestInfo = useRequestInfo();
-    const optimisticMode = useOptimisticThemeMode();
-    if (optimisticMode) {
-        return optimisticMode === 'system' ? hints.theme : optimisticMode;
-    }
-    return requestInfo.userPrefs.theme ?? hints.theme;
-}
-
-/**
- * If the user's changing their theme mode preference, this will return the
- * value it's being changed to.
- */
-export function useOptimisticThemeMode() {
-    const fetchers = useFetchers();
-
-    const themeFetcher = fetchers.find(
-        (f) => f.formData?.get('intent') === 'update-theme',
-    );
-
-    if (themeFetcher && themeFetcher.formData) {
-        const submission = parse(themeFetcher.formData, {
-            schema: ThemeFormSchema,
-        });
-        return submission.value?.theme;
-    }
-}
-
-function ThemeSwitch({ userPreference }: { userPreference?: Theme | null }) {
-    const fetcher = useFetcher<typeof action>();
-
-    const [form] = useForm({
-        id: 'theme-switch',
-        lastSubmission: fetcher.data?.submission,
-        onValidate({ formData }) {
-            return parse(formData, { schema: ThemeFormSchema });
-        },
-    });
-
-    const optimisticMode = useOptimisticThemeMode();
-    const mode = optimisticMode ?? userPreference ?? 'system';
-    const nextMode =
-        mode === 'system' ? 'light' : mode === 'light' ? 'dark' : 'system';
-    const modeLabel = {
-        light: (
-            <Icon name="sun">
-                <span className="sr-only">Light</span>
-            </Icon>
-        ),
-        dark: (
-            <Icon name="moon">
-                <span className="sr-only">Dark</span>
-            </Icon>
-        ),
-        system: (
-            <Icon name="laptop">
-                <span className="sr-only">System</span>
-            </Icon>
-        ),
-    };
-
-    return (
-        <fetcher.Form method="POST" {...form.props}>
-            <input type="hidden" name="theme" value={nextMode} />
-            <div className="flex gap-2">
-                <button
-                    name="intent"
-                    value="update-theme"
-                    type="submit"
-                    className="flex h-8 w-8 cursor-pointer items-center justify-center"
-                >
-                    {modeLabel[mode]}
-                </button>
-            </div>
-            <ErrorList errors={form.errors} id={form.errorId} />
-        </fetcher.Form>
     );
 }
 
