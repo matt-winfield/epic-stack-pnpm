@@ -40,14 +40,14 @@ overrides to `font.css`.
 
 ```css
 @font-face {
-	font-family: 'NunitoSans Fallback';
-	font-style: normal;
-	font-weight: 200;
-	src: local('Arial');
-	ascent-override: 103.02%;
-	descent-override: 35.97%;
-	line-gap-override: 0%;
-	size-adjust: 98.13%;
+    font-family: 'NunitoSans Fallback';
+    font-style: normal;
+    font-weight: 200;
+    src: local('Arial');
+    ascent-override: 103.02%;
+    descent-override: 35.97%;
+    line-gap-override: 0%;
+    size-adjust: 98.13%;
 }
 ```
 

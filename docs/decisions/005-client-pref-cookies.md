@@ -11,10 +11,10 @@ Server rendering is preferred for most things to avoid content layout shift
 limitations with this because the browser doesn't give the server enough
 information about the user's preferences. For example:
 
-- `prefers-color-scheme` (light/dark mode)
-- `prefers-reduced-data`
-- time zone offset
-- locale
+-   `prefers-color-scheme` (light/dark mode)
+-   `prefers-reduced-data`
+-   time zone offset
+-   locale
 
 And much more.
 

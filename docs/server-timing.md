@@ -28,57 +28,57 @@ time of this writing:
 
 ```tsx
 import {
-	combineServerTimings,
-	makeTimings,
-	time,
-} from '~/utils/timing.server.ts'
+    combineServerTimings,
+    makeTimings,
+    time,
+} from '#app/utils/timing.server.ts';
 
 export async function loader({ params }: DataFunctionArgs) {
-	const timings = makeTimings('notes loader') // <-- 1. Setup Timings
-	// 2. Time functions
-	const owner = await time(
-		() =>
-			prisma.user.findUnique({
-				where: {
-					username: params.username,
-				},
-				select: {
-					id: true,
-					username: true,
-					name: true,
-					imageId: true,
-				},
-			}),
-		{ timings, type: 'find user' },
-	)
-	if (!owner) {
-		throw new Response('Not found', { status: 404 })
-	}
-	// 2. Time functions
-	const notes = await time(
-		() =>
-			prisma.note.findMany({
-				where: {
-					ownerId: owner.id,
-				},
-				select: {
-					id: true,
-					title: true,
-				},
-			}),
-		{ timings, type: 'find notes' },
-	)
-	return json(
-		{ owner, notes },
-		{ headers: { 'Server-Timing': timings.toString() } }, // <-- 3. Create headers
-	)
+    const timings = makeTimings('notes loader'); // <-- 1. Setup Timings
+    // 2. Time functions
+    const owner = await time(
+        () =>
+            prisma.user.findUnique({
+                where: {
+                    username: params.username,
+                },
+                select: {
+                    id: true,
+                    username: true,
+                    name: true,
+                    imageId: true,
+                },
+            }),
+        { timings, type: 'find user' },
+    );
+    if (!owner) {
+        throw new Response('Not found', { status: 404 });
+    }
+    // 2. Time functions
+    const notes = await time(
+        () =>
+            prisma.note.findMany({
+                where: {
+                    ownerId: owner.id,
+                },
+                select: {
+                    id: true,
+                    title: true,
+                },
+            }),
+        { timings, type: 'find notes' },
+    );
+    return json(
+        { owner, notes },
+        { headers: { 'Server-Timing': timings.toString() } }, // <-- 3. Create headers
+    );
 }
 
 export const headers: HeadersFunction = ({ loaderHeaders, parentHeaders }) => {
-	return {
-		'Server-Timing': combineServerTimings(parentHeaders, loaderHeaders), // <-- 4. Send headers
-	}
-}
+    return {
+        'Server-Timing': combineServerTimings(parentHeaders, loaderHeaders), // <-- 4. Send headers
+    };
+};
 ```
 
 You can

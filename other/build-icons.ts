@@ -1,7 +1,8 @@
-import * as path from 'node:path';
+import { $ } from 'execa';
 import fsExtra from 'fs-extra';
 import { glob } from 'glob';
 import { parse } from 'node-html-parser';
+import * as path from 'node:path';
 
 const cwd = process.cwd();
 const inputDir = path.join(cwd, 'other', 'svg-icons');
@@ -150,5 +151,6 @@ async function writeIfChanged(filepath: string, newContent: string) {
         .catch(() => '');
     if (currentContent === newContent) return false;
     await fsExtra.writeFile(filepath, newContent, 'utf8');
+    await $`prettier --write ${filepath} --ignore-unknown`;
     return true;
 }

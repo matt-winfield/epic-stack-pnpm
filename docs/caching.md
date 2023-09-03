@@ -4,13 +4,13 @@ The Epic Stack comes with caching utilities and a management dashboard that
 allows you to view and clear your cache. There are two caches built into the
 Epic Stack:
 
-- **SQLite**: This is a separate database from the main application database.
-  It's managed by LiteFS so the data is replicated across all instances of your
-  app. This can be used for long-lived cached values.
-- **LRU**: This is an in-memory cache that is used to store the results of
-  expensive queries or help deduplicate requests for data. It's not replicated
-  across instances and as it's in-memory it will be cleared when your app is
-  restarted. So this should be used for short-lived cached values.
+-   **SQLite**: This is a separate database from the main application database.
+    It's managed by LiteFS so the data is replicated across all instances of
+    your app. This can be used for long-lived cached values.
+-   **LRU**: This is an in-memory cache that is used to store the results of
+    expensive queries or help deduplicate requests for data. It's not replicated
+    across instances and as it's in-memory it will be cleared when your app is
+    restarted. So this should be used for short-lived cached values.
 
 Caching is intended to be used for data that is expensive and/or slow to compute
 or retrieve. It can help you avoid costs or rate limits associated with making
@@ -34,36 +34,36 @@ up by caching them and utilizing the stale-while-revalidate features in
 cachified. Here's how you would use cachified to do this:
 
 ```tsx
-import { cachified, cache } from '~/utils/cache.server.ts'
-import { type Timings } from '~/utils/timing.server.ts'
+import { cachified, cache } from '#app/utils/cache.server.ts';
+import { type Timings } from '#app/utils/timing.server.ts';
 
 const eventSchema = z.object({
-	/* the schema for events */
-})
+    /* the schema for events */
+});
 
 export async function getScheduledEvents({
-	timings,
+    timings,
 }: {
-	timings: Timings
+    timings?: Timings;
 } = {}) {
-	const scheduledEvents = await cachified({
-		key: 'tito:scheduled-events',
-		cache,
-		timings,
-		getFreshValue: () => {
-			// do a fetch request to the tito API and stuff here
-			return [
-				/* the events you got from tito */
-			]
-		},
-		checkValue: eventSchema.array(),
-		// Time To Live (ttl) in milliseconds: the cached value is considered valid for 24 hours
-		ttl: 1000 * 60 * 60 * 24,
-		// Stale While Revalidate (swr) in milliseconds: if the cached value is less than 30 days
-		// expired, return it while fetching a fresh value in the background
-		staleWhileRevalidate: 1000 * 60 * 60 * 24 * 30,
-	})
-	return scheduledEvents
+    const scheduledEvents = await cachified({
+        key: 'tito:scheduled-events',
+        cache,
+        timings,
+        getFreshValue: () => {
+            // do a fetch request to the tito API and stuff here
+            return [
+                /* the events you got from tito */
+            ];
+        },
+        checkValue: eventSchema.array(),
+        // Time To Live (ttl) in milliseconds: the cached value is considered valid for 24 hours
+        ttl: 1000 * 60 * 60 * 24,
+        // Stale While Revalidate (swr) in milliseconds: if the cached value is less than 30 days
+        // expired, return it while fetching a fresh value in the background
+        staleWhileRevalidate: 1000 * 60 * 60 * 24 * 30,
+    });
+    return scheduledEvents;
 }
 ```
 

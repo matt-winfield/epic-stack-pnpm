@@ -1,3 +1,23 @@
+import { Field } from '#app/components/forms.tsx';
+import { Spacer } from '#app/components/spacer.tsx';
+import { Button } from '#app/components/ui/button.tsx';
+import {
+    cache,
+    getAllCacheKeys,
+    lruCache,
+    searchCacheKeys,
+} from '#app/utils/cache.server.ts';
+import {
+    ensureInstance,
+    getAllInstances,
+    getInstanceInfo,
+} from '#app/utils/litefs.server.ts';
+import {
+    invariantResponse,
+    useDebounce,
+    useDoubleCheck,
+} from '#app/utils/misc.tsx';
+import { requireUserWithRole } from '#app/utils/permissions.ts';
 import { json, redirect, type DataFunctionArgs } from '@remix-run/node';
 import {
     Form,
@@ -7,30 +27,9 @@ import {
     useSearchParams,
     useSubmit,
 } from '@remix-run/react';
-import * as React from 'react';
-import { Field } from '~/components/forms.tsx';
-import { Spacer } from '~/components/spacer.tsx';
-import { Button } from '~/components/ui/button.tsx';
-import {
-    cache,
-    getAllCacheKeys,
-    lruCache,
-    searchCacheKeys,
-} from '~/utils/cache.server.ts';
-import {
-    getAllInstances,
-    getInstanceInfo,
-    ensureInstance,
-} from '~/utils/litefs.server.ts';
-import {
-    invariantResponse,
-    useDebounce,
-    useDoubleCheck,
-} from '~/utils/misc.tsx';
-import { requireAdmin } from '~/utils/permissions.server.ts';
 
 export async function loader({ request }: DataFunctionArgs) {
-    await requireAdmin(request);
+    await requireUserWithRole(request, 'admin');
     const searchParams = new URL(request.url).searchParams;
     const query = searchParams.get('query');
     if (query === '') {
@@ -55,7 +54,7 @@ export async function loader({ request }: DataFunctionArgs) {
 }
 
 export async function action({ request }: DataFunctionArgs) {
-    await requireAdmin(request);
+    await requireUserWithRole(request, 'admin');
     const formData = await request.formData();
     const key = formData.get('cacheKey');
     const { currentInstance } = await getInstanceInfo();

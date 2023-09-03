@@ -1,19 +1,18 @@
-import fs from 'fs';
-import type BetterSqlite3 from 'better-sqlite3';
+import { updatePrimaryCacheValue } from '#app/routes/admin+/cache_.sqlite.tsx';
 import Database from 'better-sqlite3';
 import {
     cachified as baseCachified,
     lruCacheAdapter,
-    verboseReporter,
     mergeReporters,
+    verboseReporter,
     type CacheEntry,
     type Cache as CachifiedCache,
     type CachifiedOptions,
 } from 'cachified';
+import fs from 'fs';
 import { LRUCache } from 'lru-cache';
 import { z } from 'zod';
-import { updatePrimaryCacheValue } from '~/routes/admin+/cache_.sqlite.tsx';
-import { getInstanceInfo, getInstanceInfoSync } from '~/utils/litefs.server.ts';
+import { getInstanceInfo, getInstanceInfoSync } from './litefs.server.ts';
 import { singleton } from './singleton.server.ts';
 import { cachifiedTimingReporter, type Timings } from './timing.server.ts';
 
@@ -21,7 +20,7 @@ const CACHE_DATABASE_PATH = process.env.CACHE_DATABASE_PATH;
 
 const cacheDb = singleton('cacheDb', createDatabase);
 
-function createDatabase(tryAgain = true): BetterSqlite3.Database {
+function createDatabase(tryAgain = true): Database.Database {
     const db = new Database(CACHE_DATABASE_PATH);
     const { currentIsPrimary } = getInstanceInfoSync();
     if (!currentIsPrimary) return db;

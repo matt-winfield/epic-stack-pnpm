@@ -1,10 +1,9 @@
-import { type SVGProps } from 'react';
+import { cn } from '#app/utils/misc.tsx';
 import { type IconName } from '@/icon-name';
-import { cn } from '~/utils/misc.tsx';
+import { type SVGProps } from 'react';
 import href from './icons/sprite.svg';
 
-export { href };
-export { IconName };
+export { IconName, href };
 
 const sizeClassName = {
     font: 'w-[1em] h-[1em]',

@@ -20,14 +20,12 @@ import getPort, { portNumbers } from 'get-port';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import path from 'path';
-import sourceMapSupport from 'source-map-support';
 import { fileURLToPath } from 'url';
 
 // @ts-ignore - this file may not exist if you haven't built yet, but it will
 // definitely exist by the time the dev or prod server actually runs.
-import * as remixBuild from '../build/index.js';
+import * as remixBuild from '#build/index.js';
 
-sourceMapSupport.install();
 installGlobals();
 
 const MODE = process.env.NODE_ENV;

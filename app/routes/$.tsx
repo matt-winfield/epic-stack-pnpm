@@ -5,9 +5,9 @@
 // ensure the user gets the right status code and we can display a nicer error
 // message for them than the Remix and/or browser default.
 
+import { GeneralErrorBoundary } from '#app/components/error-boundary.tsx';
+import { Icon } from '#app/components/ui/icon.tsx';
 import { Link, useLocation } from '@remix-run/react';
-import { GeneralErrorBoundary } from '~/components/error-boundary.tsx';
-import { Icon } from '~/components/ui/icon.tsx';
 
 export async function loader() {
     throw new Response('Not found', { status: 404 });

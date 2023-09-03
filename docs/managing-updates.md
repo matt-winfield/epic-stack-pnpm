@@ -11,9 +11,9 @@ If you wish to change the Node.js version, you can do so by updating the
 
 ```json
 {
-	"engines": {
-		"node": "20.3.1"
-	}
+    "engines": {
+        "node": "20.3.1"
+    }
 }
 ```
 
@@ -73,9 +73,10 @@ npx npm-check-updates
 
 Notice the colors:
 
-- Green = (non-major version zero) patch updates
-- Cyan = minor updates
-- Red = major or [version zero (0.y.z)](https://semver.org/#spec-item-4) updates
+-   Green = (non-major version zero) patch updates
+-   Cyan = minor updates
+-   Red = major or [version zero (0.y.z)](https://semver.org/#spec-item-4)
+    updates
 
 ### Update green patch versions first, all at once
 

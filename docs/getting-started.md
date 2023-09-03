@@ -20,22 +20,22 @@ properly.
 
 ## Development
 
-- Initial setup:
+-   Initial setup:
 
-  ```sh
-  npm run setup
-  ```
+    ```sh
+    npm run setup
+    ```
 
-- Start dev server:
+-   Start dev server:
 
-  ```sh
-  npm run dev
-  ```
+    ```sh
+    npm run dev
+    ```
 
 This starts your app in development mode, rebuilding assets on file changes.
 
 The database seed script creates a new user with some data you can use to get
 started:
 
-- Username: `kody`
-- Password: `kodylovesyou`
+-   Username: `kody`
+-   Password: `kodylovesyou`

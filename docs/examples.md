@@ -7,45 +7,54 @@ template.
 
 This page links to examples of how to implement some things with the Epic Stack.
 
-- [Framer Motion](https://github.com/kentcdodds/epic-stack-with-framer-motion)
-  by [@kentcdodds](https://github.com/kentcdodds): Using client hints to avoid
-  content layout shift with `prefers-reduced-motion` and framer motion
-  animations.
-- [Sitemaps](https://github.com/kentcdodds/epic-stack-with-sitemap) by
-  [@kentcdodds](https://github.com/kentcdodds): Automatically generating a
-  sitemap and a nice way to handle dynamic routes and customize the sitemap on a
-  per-route basis.
-- [Cross-site Request Forgery Protection (CSRF)](https://github.com/kentcdodds/epic-stack-with-csrf)
-  by [@kentcdodds](https://github.com/kentcdodds): An example of the Epic Stack
-  with CSRF protection on forms.
-- [Epic Stack + OpenAI](https://github.com/kentcdodds/epic-ai): by
-  [@kentcdodds](https://github.com/kentcdodds): An example of the Epic Stack
-  with OpenAI's GPT API (enhances the notes feature with "generate" buttons).
-- [Prisma Client Extensions](https://github.com/L-Steinmacher/epic-stack-with-prisma-client-extensions)
-  by
-  [@L-Steinmacher](https://github.com/L-Steinmacher/epic-stack-with-prisma-client-extensions):
-  An example of the Epic Stack with Prisma Client extensions activated for enum
-  like behavior in SQLite.
-- [Epic Stack + Storybook](https://github.com/moishinetzer/epic-stack-with-storybook):
-  by [@moishinetzer](https://github.com/moishinetzer): An example of the Epic
-  Stack with Storybook. It also showcases creating a Remix stub, which is very
-  helpful for isolating Remix-specific components inside of Storybook.
-- [Socket.IO](https://github.com/L-Steinmacher/epic-stack-with-socket.io): by
-  [@L-Steinmacher](https://github.com/L-Steinmacher): An example of setting up
-  using websockets in the Epic Stack using the `Socket.IO` library.
-- [User Impersonation](https://github.com/alan2207/epic-stack-with-user-impersonation)
-  by [@alan2207](https://github.com/alan2207): An example Remix application
-  showcasing how to implement user impersonation in the Epic Stack.
-- [Epic Stack + Tailwind CSS Plugin](https://github.com/hakimLyon/epic-stack-with-tailwind-css-plugin)
-  by [@hakimLyon](https://github.com/hakimLyon): An example of the Epic Stack
-  with Tailwind CSS Plugin.
-- [Epic Stack + GitHub Auth](https://github.com/kentcdodds/epic-github-auth) by
-  [@kentcdodds](https://github.com/kentcdodds): An example of the Epic Stack
-  with GitHub Auth.
-- [Epic Stack + MongoDB as the Database](https://github.com/hakimLyon/epic-stack-with-prisma-mongodb) by
-  [@hakimLyon](https://github.com/hakimLyon): An example of the Epic Stack with Prisma using MongoDB as the database.
-- [Epic Stack Custom Themes](https://github.com/kiliman/epic-stack-theme) by [@kiliman](https://github.com/kiliman):
-  An example showing how to create a custom theme using the [`shadcn-custom-theme`](https://github.com/kiliman/shadcn-custom-theme) tool.
+-   [Framer Motion](https://github.com/kentcdodds/epic-stack-with-framer-motion)
+    by [@kentcdodds](https://github.com/kentcdodds): Using client hints to avoid
+    content layout shift with `prefers-reduced-motion` and framer motion
+    animations.
+-   [Sitemaps](https://github.com/kentcdodds/epic-stack-with-sitemap) by
+    [@kentcdodds](https://github.com/kentcdodds): Automatically generating a
+    sitemap and a nice way to handle dynamic routes and customize the sitemap on
+    a per-route basis.
+-   [Cross-site Request Forgery Protection (CSRF)](https://github.com/kentcdodds/epic-stack-with-csrf)
+    by [@kentcdodds](https://github.com/kentcdodds): An example of the Epic
+    Stack with CSRF protection on forms.
+-   [Epic Stack + OpenAI](https://github.com/kentcdodds/epic-ai): by
+    [@kentcdodds](https://github.com/kentcdodds): An example of the Epic Stack
+    with OpenAI's GPT API (enhances the notes feature with "generate" buttons).
+-   [Prisma Client Extensions](https://github.com/L-Steinmacher/epic-stack-with-prisma-client-extensions)
+    by
+    [@L-Steinmacher](https://github.com/L-Steinmacher/epic-stack-with-prisma-client-extensions):
+    An example of the Epic Stack with Prisma Client extensions activated for
+    enum like behavior in SQLite.
+-   [Epic Stack + Storybook](https://github.com/moishinetzer/epic-stack-with-storybook):
+    by [@moishinetzer](https://github.com/moishinetzer): An example of the Epic
+    Stack with Storybook. It also showcases creating a Remix stub, which is very
+    helpful for isolating Remix-specific components inside of Storybook.
+-   [Socket.IO](https://github.com/L-Steinmacher/epic-stack-with-socket.io): by
+    [@L-Steinmacher](https://github.com/L-Steinmacher): An example of setting up
+    using websockets in the Epic Stack using the `Socket.IO` library.
+-   [User Impersonation](https://github.com/alan2207/epic-stack-with-user-impersonation)
+    by [@alan2207](https://github.com/alan2207): An example Remix application
+    showcasing how to implement user impersonation in the Epic Stack.
+-   [Epic Stack + Tailwind CSS Plugin](https://github.com/hakimLyon/epic-stack-with-tailwind-css-plugin)
+    by [@hakimLyon](https://github.com/hakimLyon): An example of the Epic Stack
+    with Tailwind CSS Plugin.
+-   [Epic Stack + GitHub Auth](https://github.com/kentcdodds/epic-github-auth)
+    by [@kentcdodds](https://github.com/kentcdodds): An example of the Epic
+    Stack with GitHub Auth.
+-   [Epic Stack + MongoDB as the Database](https://github.com/hakimLyon/epic-stack-with-prisma-mongodb)
+    by [@hakimLyon](https://github.com/hakimLyon): An example of the Epic Stack
+    with Prisma using MongoDB as the database.
+-   [Epic Stack Custom Themes](https://github.com/kiliman/epic-stack-theme) by
+    [@kiliman](https://github.com/kiliman): An example showing how to create a
+    custom theme using the
+    [`shadcn-custom-theme`](https://github.com/kiliman/shadcn-custom-theme)
+    tool.
+-   [Epic Stack + OpenID Connect Auth (Google)](https://github.com/kentcdodds/epic-oidc)
+    by [@kentcdodds](https://github.com/kentcdodds): An example of the Epic
+    Stack with OpenID Connect Auth (Google) using
+    [web-oidc](https://npm.im/web-oidc) and
+    [remix-auth](https://npm.im/remix-auth).
 
 ## How to contribute
 
