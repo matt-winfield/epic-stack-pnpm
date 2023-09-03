@@ -1,6 +1,3 @@
-import crypto from 'crypto';
-import path from 'path';
-import { fileURLToPath } from 'url';
 import {
     createRequestHandler as _createRequestHandler,
     type RequestHandler,
@@ -16,12 +13,15 @@ import chalk from 'chalk';
 import chokidar from 'chokidar';
 import closeWithGrace from 'close-with-grace';
 import compression from 'compression';
+import crypto from 'crypto';
 import express from 'express';
 import rateLimit from 'express-rate-limit';
 import getPort, { portNumbers } from 'get-port';
 import helmet from 'helmet';
 import morgan from 'morgan';
+import path from 'path';
 import sourceMapSupport from 'source-map-support';
+import { fileURLToPath } from 'url';
 
 // @ts-ignore - this file may not exist if you haven't built yet, but it will
 // definitely exist by the time the dev or prod server actually runs.
@@ -258,6 +258,9 @@ if (MODE === 'development') {
 
     const dirname = path.dirname(fileURLToPath(import.meta.url));
     const watchPath = path.join(dirname, BUILD_PATH).replace(/\\/g, '/');
-    const watcher = chokidar.watch(watchPath, { ignoreInitial: true });
+    const watcher = chokidar.watch(watchPath, {
+        ignoreInitial: true,
+        awaitWriteFinish: { stabilityThreshold: 200 },
+    });
     watcher.on('all', reloadBuild);
 }
