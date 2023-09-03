@@ -6,6 +6,8 @@ import closeWithGrace from 'close-with-grace';
 
 installGlobals();
 
+installGlobals();
+
 closeWithGrace(async ({ err }) => {
     if (err) {
         console.error(chalk.red(err));

@@ -1,3 +1,14 @@
+import { GeneralErrorBoundary } from '#app/components/error-boundary.tsx';
+import { floatingToolbarClassName } from '#app/components/floating-toolbar.tsx';
+import { ErrorList, Field, TextareaField } from '#app/components/forms.tsx';
+import { Button } from '#app/components/ui/button.tsx';
+import { Icon } from '#app/components/ui/icon.tsx';
+import { Label } from '#app/components/ui/label.tsx';
+import { StatusButton } from '#app/components/ui/status-button.tsx';
+import { Textarea } from '#app/components/ui/textarea.tsx';
+import { requireUserId } from '#app/utils/auth.server.ts';
+import { prisma } from '#app/utils/db.server.ts';
+import { cn, getNoteImgSrc } from '#app/utils/misc.tsx';
 import {
     conform,
     list,
@@ -20,17 +31,6 @@ import {
 import { Form, useFetcher } from '@remix-run/react';
 import { useRef, useState } from 'react';
 import { z } from 'zod';
-import { GeneralErrorBoundary } from '#app/components/error-boundary.tsx';
-import { floatingToolbarClassName } from '#app/components/floating-toolbar.tsx';
-import { ErrorList, Field, TextareaField } from '#app/components/forms.tsx';
-import { Button } from '#app/components/ui/button.tsx';
-import { Icon } from '#app/components/ui/icon.tsx';
-import { Label } from '#app/components/ui/label.tsx';
-import { StatusButton } from '#app/components/ui/status-button.tsx';
-import { Textarea } from '#app/components/ui/textarea.tsx';
-import { requireUserId } from '#app/utils/auth.server.ts';
-import { prisma } from '#app/utils/db.server.ts';
-import { cn, getNoteImgSrc } from '#app/utils/misc.tsx';
 
 const titleMinLength = 1;
 const titleMaxLength = 100;

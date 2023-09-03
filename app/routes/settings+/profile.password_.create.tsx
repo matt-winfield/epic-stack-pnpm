@@ -1,8 +1,3 @@
-import { conform, useForm } from '@conform-to/react';
-import { getFieldsetConstraint, parse } from '@conform-to/zod';
-import { json, redirect, type DataFunctionArgs } from '@remix-run/node';
-import { Form, Link, useActionData } from '@remix-run/react';
-import { z } from 'zod';
 import { ErrorList, Field } from '#app/components/forms.tsx';
 import { Button } from '#app/components/ui/button.tsx';
 import { Icon } from '#app/components/ui/icon.tsx';
@@ -11,6 +6,11 @@ import { getPasswordHash, requireUserId } from '#app/utils/auth.server.ts';
 import { prisma } from '#app/utils/db.server.ts';
 import { useIsPending } from '#app/utils/misc.tsx';
 import { PasswordSchema } from '#app/utils/user-validation.ts';
+import { conform, useForm } from '@conform-to/react';
+import { getFieldsetConstraint, parse } from '@conform-to/zod';
+import { json, redirect, type DataFunctionArgs } from '@remix-run/node';
+import { Form, Link, useActionData } from '@remix-run/react';
+import { z } from 'zod';
 
 export const handle = {
     breadcrumb: <Icon name="dots-horizontal">Password</Icon>,

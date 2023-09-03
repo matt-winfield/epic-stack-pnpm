@@ -1,7 +1,7 @@
-import { faker } from '@faker-js/faker';
-import { expect, test } from '@playwright/test';
 import { prisma } from '#app/utils/db.server.ts';
 import { loginPage } from '#tests/playwright-utils.ts';
+import { faker } from '@faker-js/faker';
+import { expect, test } from '@playwright/test';
 
 test('Users can create notes', async ({ page }) => {
     const user = await loginPage({ page });

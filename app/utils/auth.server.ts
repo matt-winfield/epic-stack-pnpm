@@ -208,6 +208,67 @@ export async function logout(
     });
 }
 
+export async function signupWithConnection({
+    email,
+    username,
+    name,
+    providerId,
+    providerName,
+    imageUrl,
+}: {
+    email: User['email'];
+    username: User['username'];
+    name: User['name'];
+    providerId: Connection['providerId'];
+    providerName: Connection['providerName'];
+    imageUrl?: string;
+}) {
+    const session = await prisma.session.create({
+        data: {
+            expirationDate: getSessionExpirationDate(),
+            user: {
+                create: {
+                    email: email.toLowerCase(),
+                    username: username.toLowerCase(),
+                    name,
+                    connections: { create: { providerId, providerName } },
+                    image: imageUrl
+                        ? { create: await downloadFile(imageUrl) }
+                        : undefined,
+                },
+            },
+        },
+        select: { id: true, expirationDate: true },
+    });
+
+    return session;
+}
+
+export async function logout(
+    {
+        request,
+        redirectTo = '/',
+    }: {
+        request: Request;
+        redirectTo?: string;
+    },
+    responseInit?: ResponseInit,
+) {
+    const cookieSession = await sessionStorage.getSession(
+        request.headers.get('cookie'),
+    );
+    const sessionId = cookieSession.get(sessionKey);
+    await prisma.session.delete({ where: { id: sessionId } });
+    cookieSession.unset(sessionKey);
+    throw redirect(safeRedirect(redirectTo), {
+        ...responseInit,
+        headers: combineHeaders(
+            { 'set-cookie': await sessionStorage.commitSession(cookieSession) },
+            responseInit?.headers,
+        ),
+    });
+}
+
 export async function getPasswordHash(password: string) {
     const hash = await bcrypt.hash(password, 10);
     return hash;

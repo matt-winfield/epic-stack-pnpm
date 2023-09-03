@@ -1,5 +1,5 @@
-import { expect, test } from '@playwright/test';
 import { insertNewUser } from '#tests/playwright-utils.ts';
+import { expect, test } from '@playwright/test';
 
 test('Search from home page', async ({ page }) => {
     const newUser = await insertNewUser();

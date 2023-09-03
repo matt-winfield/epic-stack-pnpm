@@ -1,5 +1,5 @@
-import path from 'node:path';
 import fsExtra from 'fs-extra';
+import path from 'node:path';
 import { afterAll, afterEach, beforeAll } from 'vitest';
 import { BASE_DATABASE_PATH } from './global-setup.ts';
 
