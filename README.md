@@ -23,6 +23,12 @@ instead of `npm` in the instructions.
 Make sure you are using node 18 and pnpm 8. You can check with `node -v` and
 `pnpm -v`.
 
+Create a new project using
+`npx create-remix --template matt-winfield/epic-stack-pnpm`.
+
+When prompted, say 'no' to installing the dependencies (otherwise it will try to
+use npm).
+
 Run `pnpm install` to install dependencies. Then run `pnpm run setup` to
 configure the project for local development.
 
